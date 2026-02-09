@@ -4,74 +4,85 @@
 <meta charset="UTF-8">
 <title>Para Nosotros ❤️</title>
 
-
 <style>
-body {
-    margin: 0;
-    font-family: 'Segoe UI', sans-serif;
-    background: linear-gradient(135deg, #ff9a9e, #fad0c4);
-    text-align: center;
-    color: #5a2a2a;
-    transition: background 0.8s, color 0.8s;
+body{
+  margin:0;
+  font-family:'Segoe UI', sans-serif;
+  background:linear-gradient(135deg,#ffd6e0,#fff0f5);
+  text-align:center;
+  color:#5a2a2a;
+  overflow-x:hidden;
+  transition:0.6s;
 }
 
-.dark {
-    background: linear-gradient(135deg, #2b1055, #7597de);
-    color: white;
+.dark{
+  background:linear-gradient(135deg,#2b1055,#7597de);
+  color:white;
 }
 
-.container {
-    padding: 40px 20px;
+.container{
+  padding:40px 20px;
 }
 
-.card {
-    background: white;
-    border-radius: 20px;
-    padding: 25px;
-    max-width: 600px;
-    margin: 25px auto;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-    transition: transform 0.3s;
+.card{
+  background:white;
+  max-width:700px;
+  margin:auto;
+  padding:30px;
+  border-radius:20px;
+  box-shadow:0 10px 30px rgba(0,0,0,0.1);
+  animation:aparecer 1.5s ease;
 }
 
-.dark .card {
-    background: rgba(255,255,255,0.1);
+.dark .card{
+  background:rgba(255,255,255,0.08);
 }
 
-.card:hover {
-    transform: scale(1.02);
+img{
+  width:280px;
+  border-radius:20px;
+  margin:20px 0;
+  box-shadow:0 10px 25px rgba(0,0,0,0.2);
+  animation:latido 2s infinite;
 }
 
-img {
-    width: 100%;
-    border-radius: 15px;
+button{
+  background:#ff4d88;
+  color:white;
+  border:none;
+  padding:12px 25px;
+  border-radius:30px;
+  font-size:16px;
+  cursor:pointer;
+  margin-top:15px;
+  transition:0.3s;
 }
 
-button {
-    background: #ff4d6d;
-    color: white;
-    border: none;
-    padding: 14px 22px;
-    margin: 10px;
-    font-size: 16px;
-    border-radius: 25px;
-    cursor: pointer;
+button:hover{
+  transform:scale(1.1);
 }
 
-.hidden {
-    display: none;
+@keyframes aparecer{
+  from{opacity:0; transform:translateY(30px);}
+  to{opacity:1; transform:translateY(0);}
 }
 
-.heart {
-    position: fixed;
-    bottom: -10px;
-    font-size: 24px;
-    animation: floatUp 6s linear infinite;
+@keyframes latido{
+  0%{transform:scale(1);}
+  50%{transform:scale(1.05);}
+  100%{transform:scale(1);}
 }
 
-@keyframes floatUp {
-    from { transform: translateY(0); opacity: 1; }
-    to { transform: translateY(-110vh); opacity: 0; }
+.corazon{
+  position:fixed;
+  color:#ff4d88;
+  font-size:20px;
+  animation:subir 5s linear infinite;
+}
+
+@keyframes subir{
+  from{transform:translateY(100vh); opacity:1;}
+  to{transform:translateY(-10vh); opacity:0;}
 }
 </style>
 </head>
@@ -79,69 +90,54 @@ button {
 <body>
 
 <div class="container">
-
-    <img src="Nosotros.jpg" alt="Nosotros">
+<div class="card">
 
 <h1>Para Nosotros 💖</h1>
 
-<div class="card">
-    <h2>Nuestra historia</h2>
-    <img src="nosotros.jpg" alt="Nosotros">
-    <p>
-    No es solo una foto… es un pedacito de mi felicidad.
-    </p>
-</div>
+<h2>Nuestra historia</h2>
 
-<div class="card">
-    <h2>Un poema para ti</h2>
-    <p><em>
-    “Te quiero para volvernos locos de risa,<br>
-    ebrios de nada y pasear sin prisa<br>
-    por las calles.”
-    </em></p>
-    <p>— Alfonsina Storni</p>
-</div>
+<img src="Nosotros.jpg" alt="Nosotros">
 
-<button onclick="abrirCarta()">Abrir carta 💌</button>
-<button onclick="corazones()">Lluvia de amor ❤️</button>
-<button onclick="modoNoche()">Modo romántico 🌙</button>
+<p>
+Amarte es esto:<br>
+una palabra que está por decirse,<br>
+un gesto que apenas nace,<br>
+y sin embargo llena el mundo.
+<br><br>
+— Alfonsina Storni
+</p>
 
-<div id="carta" class="card hidden">
-    <h2>Mi carta para ti</h2>
-    <p>
-    Gracias por existir en mi vida.<br>
-    Contigo todo tiene más sentido.<br>
-    Te elijo hoy, mañana y siempre.
-    </p>
-</div>
+<button onclick="mensaje()">Toca aquí ❤️</button>
+<br>
+<button onclick="modo()">Modo mágico ✨</button>
+
+<p id="sorpresa"></p>
 
 </div>
-
-<!-- música opcional -->
-<audio autoplay loop>
-  <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
-</audio>
+</div>
 
 <script>
-function abrirCarta() {
-    document.getElementById("carta").classList.remove("hidden");
+function mensaje(){
+  document.getElementById("sorpresa").innerHTML =
+  "Eres mi lugar favorito en el mundo 💞";
 }
 
-function corazones() {
-    for (let i = 0; i < 25; i++) {
-        let heart = document.createElement("div");
-        heart.className = "heart";
-        heart.innerHTML = "❤️";
-        heart.style.left = Math.random() * 100 + "vw";
-        heart.style.animationDuration = (4 + Math.random() * 3) + "s";
-        document.body.appendChild(heart);
-        setTimeout(() => heart.remove(), 6000);
-    }
+function modo(){
+  document.body.classList.toggle("dark");
 }
 
-function modoNoche() {
-    document.body.classList.toggle("dark");
+function corazones(){
+  const corazon = document.createElement("div");
+  corazon.className = "corazon";
+  corazon.innerHTML = "❤";
+  corazon.style.left = Math.random()*100 + "vw";
+  corazon.style.fontSize = (Math.random()*20+10)+"px";
+  document.body.appendChild(corazon);
+
+  setTimeout(()=>{corazon.remove();},5000);
 }
+
+setInterval(corazones,500);
 </script>
 
 </body>
