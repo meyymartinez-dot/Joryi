@@ -54,12 +54,16 @@ button{
   border-radius:30px;
   font-size:16px;
   cursor:pointer;
-  margin-top:15px;
+  margin:10px;
   transition:0.3s;
 }
 
 button:hover{
   transform:scale(1.1);
+}
+
+.hidden{
+  display:none;
 }
 
 @keyframes aparecer{
@@ -77,7 +81,7 @@ button:hover{
   position:fixed;
   color:#ff4d88;
   font-size:20px;
-  animation:subir 5s linear infinite;
+  animation:subir 5s linear forwards;
 }
 
 @keyframes subir{
@@ -95,49 +99,69 @@ button:hover{
 <h1>Para Nosotros 💖</h1>
 
 <h2>Nuestra historia</h2>
-
 <img src="Nosotros.jpg" alt="Nosotros">
 
+<h2>Poemas que hablan de amor</h2>
+
 <p>
-Amarte es esto:<br>
-una palabra que está por decirse,<br>
-un gesto que apenas nace,<br>
-y sin embargo llena el mundo.
-<br><br>
-— Alfonsina Storni
+“Te amo como se aman ciertas cosas oscuras,  
+secretamente, entre la sombra y el alma.”
+<br>— Gabriela Mistral
 </p>
 
-<button onclick="mensaje()">Toca aquí ❤️</button>
-<br>
-<button onclick="modo()">Modo mágico ✨</button>
+<p>
+“Te quiero para volvernos locos de risa,  
+ebrios de nada y pasear sin prisa por las calles.”
+<br>— Alfonsina Storni
+</p>
 
-<p id="sorpresa"></p>
+<button onclick="mostrarCarta()">Abrir mi carta 💌</button>
+<button onclick="lluvia()">Lluvia de amor ❤️</button>
+<button onclick="modo()">Modo romántico 🌙</button>
+
+<div id="carta" class="hidden">
+  <p>
+  Te elijo todos los días…<br><br>
+
+  Te elijo en la calma y en el ruido,<br>
+  en lo simple y en lo profundo.<br><br>
+
+  Hay una calidez en nuestro amor que me abraza incluso cuando no estás cerca.<br>
+  Una cercanía que no depende de la distancia.<br><br>
+
+  Contigo existe una conexión que no necesita explicarse,
+  solo sentirse.<br><br>
+
+  Gracias por existir en mi vida,
+  por ser hogar, compañía y ternura.<br><br>
+
+  Te elijo hoy, mañana y siempre. ❤️
+  </p>
+</div>
 
 </div>
 </div>
 
 <script>
-function mensaje(){
-  document.getElementById("sorpresa").innerHTML =
-  "Eres mi lugar favorito en el mundo 💞";
+function mostrarCarta(){
+  document.getElementById("carta").classList.toggle("hidden");
 }
 
 function modo(){
   document.body.classList.toggle("dark");
 }
 
-function corazones(){
-  const corazon = document.createElement("div");
-  corazon.className = "corazon";
-  corazon.innerHTML = "❤";
-  corazon.style.left = Math.random()*100 + "vw";
-  corazon.style.fontSize = (Math.random()*20+10)+"px";
-  document.body.appendChild(corazon);
-
-  setTimeout(()=>{corazon.remove();},5000);
+function lluvia(){
+  for(let i=0;i<25;i++){
+    let c=document.createElement("div");
+    c.className="corazon";
+    c.innerHTML="❤";
+    c.style.left=Math.random()*100+"vw";
+    c.style.fontSize=(Math.random()*20+10)+"px";
+    document.body.appendChild(c);
+    setTimeout(()=>c.remove(),5000);
+  }
 }
-
-setInterval(corazones,500);
 </script>
 
 </body>
