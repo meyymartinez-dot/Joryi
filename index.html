@@ -31,21 +31,39 @@ body{
   padding:30px;
   border-radius:20px;
   box-shadow:0 10px 30px rgba(0,0,0,0.1);
-  animation:aparecer 1.5s ease;
 }
 
-.dark .card{
-  background:rgba(255,255,255,0.08);
-}
-
-img{
-  width:280px;
-  border-radius:20px;
+/* FOTO CON MARCO */
+.foto-marco{
+  display:inline-block;
+  padding:10px;
+  border:4px solid #ff4d88;
+  border-radius:25px;
+  box-shadow:0 0 20px rgba(255,77,136,0.4);
   margin:20px 0;
-  box-shadow:0 10px 25px rgba(0,0,0,0.2);
-  animation:latido 2s infinite;
+  cursor:pointer;
+  transition:0.3s;
 }
 
+.foto-marco:hover{
+  transform:scale(1.05);
+}
+
+.foto-marco img{
+  width:280px;
+  border-radius:15px;
+  display:block;
+}
+
+/* MENSAJE FOTO */
+#mensajeFoto{
+  display:none;
+  font-size:18px;
+  margin-top:10px;
+  animation:aparecer 1s ease;
+}
+
+/* BOTONES */
 button{
   background:#ff4d88;
   color:white;
@@ -62,31 +80,44 @@ button:hover{
   transform:scale(1.1);
 }
 
-.hidden{
+/* CARTA */
+.carta{
   display:none;
+  max-width:500px;
+  margin:30px auto;
+  padding:30px;
+  background:#fffdf7;
+  border:2px solid #e8d8c3;
+  border-radius:10px;
+  box-shadow:0 10px 25px rgba(0,0,0,0.15);
+  font-family:'Brush Script MT', cursive;
+  font-size:22px;
+  line-height:1.6;
+  text-align:left;
+  animation:aparecer 1s ease;
 }
 
-@keyframes aparecer{
-  from{opacity:0; transform:translateY(30px);}
-  to{opacity:1; transform:translateY(0);}
+.firma{
+  margin-top:20px;
+  text-align:right;
 }
 
-@keyframes latido{
-  0%{transform:scale(1);}
-  50%{transform:scale(1.05);}
-  100%{transform:scale(1);}
-}
-
+/* CORAZONES */
 .corazon{
   position:fixed;
-  color:#ff4d88;
+  bottom:-20px;
   font-size:20px;
-  animation:subir 5s linear forwards;
+  animation:subir 4s linear forwards;
 }
 
 @keyframes subir{
-  from{transform:translateY(100vh); opacity:1;}
-  to{transform:translateY(-10vh); opacity:0;}
+  from{transform:translateY(0); opacity:1;}
+  to{transform:translateY(-110vh); opacity:0;}
+}
+
+@keyframes aparecer{
+  from{opacity:0; transform:translateY(20px);}
+  to{opacity:1; transform:translateY(0);}
 }
 </style>
 </head>
@@ -99,19 +130,26 @@ button:hover{
 <h1>Para Nosotros 💖</h1>
 
 <h2>Nuestra historia</h2>
-<img src="Nosotros.jpg" alt="Nosotros">
 
-<h2>Poemas que hablan de amor</h2>
+<div class="foto-marco" onclick="mostrarMensajeFoto()">
+  <img src="Nosotros.jpg" alt="Nosotros">
+</div>
+
+<div id="mensajeFoto">gracias por momentos como este 💞</div>
+
+<h2>Poemas de amor</h2>
 
 <p>
-“Te amo como se aman ciertas cosas oscuras,  
-secretamente, entre la sombra y el alma.”
-<br>— Gabriela Mistral
+“Te quiero para volvernos locos de risa,<br>
+ebrios de nada y pasear sin prisa por las calles.”
+<br>— Alfonsina Storni
 </p>
 
 <p>
-“Te quiero para volvernos locos de risa,  
-ebrios de nada y pasear sin prisa por las calles.”
+“Amarte es esto:<br>
+una palabra que está por decirse,<br>
+un gesto que apenas nace,<br>
+y sin embargo llena el mundo.”
 <br>— Alfonsina Storni
 </p>
 
@@ -119,24 +157,22 @@ ebrios de nada y pasear sin prisa por las calles.”
 <button onclick="lluvia()">Lluvia de amor ❤️</button>
 <button onclick="modo()">Modo romántico 🌙</button>
 
-<div id="carta" class="hidden">
-  <p>
-  Te elijo todos los días…<br><br>
+<div id="carta" class="carta">
+Te elijo todos los días…<br><br>
 
-  Te elijo en la calma y en el ruido,<br>
-  en lo simple y en lo profundo.<br><br>
+Te elijo en la calma y en el ruido,<br>
+en la cercanía y en la distancia.<br><br>
 
-  Hay una calidez en nuestro amor que me abraza incluso cuando no estás cerca.<br>
-  Una cercanía que no depende de la distancia.<br><br>
+Hay una calidez en nuestro amor que me abraza siempre.<br>
+Una ternura que vuelve hogar cualquier lugar contigo.<br><br>
 
-  Contigo existe una conexión que no necesita explicarse,
-  solo sentirse.<br><br>
+Lo que tenemos es conexión, presencia, complicidad.<br>
+Algo que no necesita explicarse… solo sentirse.<br><br>
 
-  Gracias por existir en mi vida,
-  por ser hogar, compañía y ternura.<br><br>
+Gracias por caminar a mi lado.<br>
+Te elijo hoy, mañana y siempre.<br>
 
-  Te elijo hoy, mañana y siempre. ❤️
-  </p>
+<div class="firma">tuya, Mey ❤️</div>
 </div>
 
 </div>
@@ -144,7 +180,12 @@ ebrios de nada y pasear sin prisa por las calles.”
 
 <script>
 function mostrarCarta(){
-  document.getElementById("carta").classList.toggle("hidden");
+  let carta = document.getElementById("carta");
+  carta.style.display = carta.style.display === "block" ? "none" : "block";
+}
+
+function mostrarMensajeFoto(){
+  document.getElementById("mensajeFoto").style.display="block";
 }
 
 function modo(){
@@ -152,14 +193,14 @@ function modo(){
 }
 
 function lluvia(){
-  for(let i=0;i<25;i++){
+  for(let i=0;i<40;i++){
     let c=document.createElement("div");
     c.className="corazon";
     c.innerHTML="❤";
     c.style.left=Math.random()*100+"vw";
     c.style.fontSize=(Math.random()*20+10)+"px";
     document.body.appendChild(c);
-    setTimeout(()=>c.remove(),5000);
+    setTimeout(()=>c.remove(),4000);
   }
 }
 </script>
